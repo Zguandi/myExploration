@@ -6,14 +6,9 @@ function pdf2cdf(n::Int64,pdf::Function,interval::Tuple{Float64,Float64},args...
     x = range(interval[1],stop=interval[2],length=n)
     cdf = zeros(n)
     cdf[1] = 0.0
-    # integrate using 4th order Runge-Kutta method
+    # integrate using Runge Kutta
     for i in 2:n
-        h = x[i] - x[i-1]
-        k1 = h*pdf(x[i-1],args...)
-        k2 = h*pdf(x[i-1]+h/2,k1/2,args...)
-        k3 = h*pdf(x[i-1]+h/2,k2/2,args...)
-        k4 = h*pdf(x[i-1]+h,k3,args...)
-        cdf[i] = cdf[i-1] + (k1 + 2*k2 + 2*k3 + k4)/6
+        cdf[i] = cdf[i-1] + (pdf(x[i-1],args...) + pdf(x[i],args...))*(x[i]-x[i-1])/2
     end
     # normalize the cdf
     cdf = cdf./cdf[end]
