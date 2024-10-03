@@ -53,11 +53,16 @@ function cache2random(n::Int64,filename)
 end
 
 # test
-pdf(x) = 2*x
-interval = (0.0,1.0)
-n = 1001
-filename = "cdf.txt"
-xs,cdfs = pdf2cdf(n,pdf,interval)
-cdf2cache(xs,cdfs,filename)
 
-println(sample[1:10])
+# pdf(x) = 2*x
+# interval = (0.0,1.0)
+# n = 1001
+# filename = "cdf.txt"
+# xs,cdfs = pdf2cdf(n,pdf,interval)
+# cdf2cache(xs,cdfs,filename)
+# xm,cdfm = cache2cdf(n,filename)
+# cdf_inv = cdfInverseInterp(xm,cdfm)
+# println(cdf_inv(rand(10)))
+
+# using Plots
+# histogram(cdf_inv(rand(10000)),nbins=100)
