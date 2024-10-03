@@ -19,7 +19,7 @@ function congurential_generator(seed, c, p, n)
 end
 
 function logistic_generator(seed, a, n)
-    const cachelen = 1001
+    cachelen = 1001
     sample = []
     x = seed
     for i in 1:n
