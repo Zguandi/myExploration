@@ -19,6 +19,7 @@ function congurential_generator(seed, c, p, n)
 end
 
 function logistic_generator(seed, a, n)
+    const cachelen = 1001
     sample = []
     x = seed
     for i in 1:n
@@ -26,10 +27,13 @@ function logistic_generator(seed, a, n)
         push!(sample, x)
     end
     # open file cdf.txt
-    x_list_cdf = zeros(1001)
-    cdf = zeros(1001)
-    open("./logisticCdf.txt", "r") do f
-        for i in 1:1001
+    x_list_cdf = zeros(cachelen)
+    cdf = zeros(cachelen)
+
+    dir_self = dirname(@__FILE__)
+    cdfcachePath = joinpath(dir_self, "logisticCdf.txt")
+    open(cdfcachePath, "r") do f
+        for i in 1:cachelen
             x_list_cdf[i], cdf[i] = split(readline(f), " ") |> x->parse.(Float64,x)
         end
     end
